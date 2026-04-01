@@ -105,110 +105,6 @@
       transform: translateY(0);
     }
 
-    /* ── Header ── */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      transition: background var(--transition);
-    }
-
-    .header__inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 72px;
-    }
-
-    .header__logo {
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: 1.35rem;
-      letter-spacing: -0.02em;
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .header__logo span {
-      color: var(--red);
-    }
-
-    .header__nav {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-
-    .header__nav a {
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--gray-300);
-      transition: color var(--transition);
-      position: relative;
-    }
-
-    .header__nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--red);
-      transition: width var(--transition);
-    }
-
-    .header__nav a:hover { color: var(--white); }
-    .header__nav a:hover::after { width: 100%; }
-    .header__nav a.active { color: var(--white); }
-    .header__nav a.active::after { width: 100%; }
-
-    .header__cta {
-      font-family: var(--font-body);
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 10px 24px;
-      background: var(--red);
-      color: var(--white);
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background var(--transition), transform var(--transition);
-    }
-
-    .header__cta:hover {
-      background: var(--red-dark);
-      transform: translateY(-1px);
-    }
-
-    /* Mobile menu toggle */
-    .header__toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
-
-    .header__toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--white);
-      border-radius: 2px;
-      transition: var(--transition);
-    }
 
     /* ── Hero Section ── */
     .hero {
@@ -560,99 +456,6 @@
       box-shadow: 0 6px 28px rgba(0,0,0,0.2);
     }
 
-    /* ── Footer ── */
-    .footer {
-      background: var(--gray-900);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 56px 0 28px;
-    }
-
-    .footer__grid {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-
-    .footer__brand-name {
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: 1.2rem;
-      color: var(--white);
-      margin-bottom: 12px;
-    }
-
-    .footer__brand-name span { color: var(--red); }
-
-    .footer__brand-desc {
-      font-size: 0.85rem;
-      color: var(--gray-300);
-      line-height: 1.6;
-      max-width: 280px;
-    }
-
-    .footer__col-title {
-      font-family: var(--font-heading);
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--white);
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .footer__links {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .footer__links a {
-      font-size: 0.85rem;
-      color: var(--gray-300);
-      transition: color var(--transition);
-    }
-
-    .footer__links a:hover { color: var(--red); }
-
-    .footer__bottom {
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding-top: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .footer__copy {
-      font-size: 0.8rem;
-      color: var(--gray-700);
-    }
-
-    .footer__socials {
-      display: flex;
-      gap: 12px;
-    }
-
-    .footer__socials a {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background var(--transition);
-    }
-
-    .footer__socials a:hover { background: rgba(212,48,48,0.2); }
-
-    .footer__socials svg {
-      width: 16px;
-      height: 16px;
-      fill: var(--gray-300);
-    }
 
     /* ── WhatsApp Float ── */
     .whatsapp-float {
@@ -715,23 +518,6 @@
     }
 
     @media (max-width: 768px) {
-      .header__nav { display: none; }
-      .header__toggle { display: flex; }
-
-      .header__nav.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 72px;
-        left: 0;
-        width: 100%;
-        background: rgba(0,0,0,0.95);
-        backdrop-filter: blur(16px);
-        padding: 24px;
-        gap: 20px;
-        border-bottom: 1px solid rgba(255,255,255,0.06);
-      }
-
       .hero__content { padding: 90px 0 48px; gap: 32px; }
 
       .hero__features { flex-direction: column; align-items: center; }
@@ -741,18 +527,11 @@
       .hero__video { max-width: 280px; max-height: 400px; }
 
       .cta-banner__inner { padding: 48px 24px; }
-
-      .footer__grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 32px;
-      }
     }
 
     @media (max-width: 480px) {
       .hero__heading { font-size: 1.6rem; }
       .hero__buttons { flex-direction: column; align-items: center; }
-      .footer__grid { grid-template-columns: 1fr; }
-      .footer__bottom { flex-direction: column; text-align: center; }
     }
   
 /* ══════════════════════════════════════

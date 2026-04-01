@@ -59,52 +59,6 @@
       transform: translateY(0);
     }
 
-    /* ── Header ────────────────────────────────────── */
-    .header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      padding: 1rem 0;
-      background: rgba(10,10,10,.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      transition: background .3s;
-    }
-    .header .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .logo {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: -.02em;
-      color: var(--white);
-    }
-    .logo span { color: var(--red); }
-
-    .nav { display: flex; align-items: center; gap: 2rem; }
-    .nav a {
-      font-family: var(--font-body);
-      font-size: .875rem;
-      font-weight: 500;
-      color: var(--gray-300);
-      transition: color .25s;
-      position: relative;
-    }
-    .nav a:hover,
-    .nav a.active { color: var(--white); }
-    .nav a.active::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0; right: 0;
-      height: 2px;
-      background: var(--red);
-      border-radius: 1px;
-    }
-
     .btn {
       display: inline-flex;
       align-items: center;
@@ -132,24 +86,6 @@
       border: 1.5px solid rgba(255,255,255,.2);
     }
     .btn-outline:hover { border-color: var(--red); color: var(--red); }
-
-    /* Mobile toggle */
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .nav-toggle span {
-      display: block;
-      width: 24px; height: 2px;
-      background: var(--white);
-      border-radius: 2px;
-      transition: .3s;
-    }
 
     /* ── Hero ──────────────────────────────────────── */
     .hero {
@@ -320,49 +256,6 @@
       margin: 0 auto 2rem;
     }
 
-    /* ── Footer ────────────────────────────────────── */
-    .footer {
-      padding: 4rem 0 2rem;
-      border-top: 1px solid rgba(255,255,255,.06);
-      background: var(--black);
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-    .footer-col h6 {
-      font-family: var(--font-display);
-      font-size: .875rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--white);
-      margin-bottom: 1rem;
-    }
-    .footer-col a,
-    .footer-col p {
-      display: block;
-      font-size: .875rem;
-      color: var(--gray-500);
-      margin-bottom: .5rem;
-      transition: color .25s;
-    }
-    .footer-col a:hover { color: var(--red); }
-
-    .footer-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,.06);
-      font-size: .8125rem;
-      color: var(--gray-500);
-    }
-    .footer-socials { display: flex; gap: 1rem; }
-    .footer-socials a { transition: color .25s; }
-    .footer-socials a:hover { color: var(--red); }
 
     /* ── WhatsApp Float ────────────────────────────── */
     .whatsapp-float {
@@ -385,34 +278,9 @@
     .whatsapp-float svg { width: 32px; height: 32px; fill: var(--white); }
 
     /* ── Responsive ────────────────────────────────── */
-    @media (max-width: 1024px) {
-      .nav { gap: 1.25rem; }
-      .nav a { font-size: .8125rem; }
-    }
-
     @media (max-width: 768px) {
-      .nav-toggle { display: flex; }
-      .nav {
-        position: fixed;
-        top: 0; right: -100%;
-        width: 280px; height: 100vh;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 5rem 2rem 2rem;
-        background: var(--dark);
-        border-left: 1px solid rgba(255,255,255,.06);
-        transition: right .35s var(--ease);
-        gap: 1.25rem;
-      }
-      .nav.open { right: 0; }
-      .nav a { font-size: 1rem; }
       .hero .container { grid-template-columns: 1fr; }
       .hero-features { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 480px) {
-      .footer-grid { grid-template-columns: 1fr; }
     }
   
 /* ══════════════════════════════════════
