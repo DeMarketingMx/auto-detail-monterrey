@@ -748,7 +748,180 @@
                 padding: 20px 24px;
             }
         }
-    </style>
+    
+/* ══════════════════════════════════════
+   STANDARD HEADER
+══════════════════════════════════════ */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+  transition: background 0.4s ease, padding 0.4s ease;
+}
+.header.scrolled {
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(20px);
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header__logo {
+  font-family: var(--font-display, 'Outfit', sans-serif);
+  font-weight: 800;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #fff;
+  text-decoration: none;
+}
+.header__logo span { color: var(--red, #D43030); }
+.header__logo small {
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  display: block;
+}
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+.header__nav a {
+  font-family: var(--font-display, 'Outfit', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: rgba(255,255,255,0.8);
+  transition: color 0.3s;
+  position: relative;
+  text-decoration: none;
+}
+.header__nav a:hover { color: #fff; }
+.header__nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--red, #D43030);
+  transition: width 0.3s ease;
+}
+.header__nav a:hover::after { width: 100%; }
+.header__nav a.active { color: #fff; }
+.header__nav a.active::after { width: 100%; }
+.header__cta .btn {
+  padding: 0.65rem 1.75rem;
+  font-size: 0.8rem;
+}
+.header__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.header__hamburger span {
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  transition: 0.3s;
+}
+
+/* Mobile nav */
+@media (max-width: 768px) {
+  .header__nav { display: none; }
+  .header__nav.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.97);
+    padding: 1.5rem;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .header__cta { display: none; }
+  .header__cta.mobile-show {
+    display: block;
+  }
+  .header__hamburger { display: flex; }
+}
+
+/* ══════════════════════════════════════
+   STANDARD FOOTER
+══════════════════════════════════════ */
+.footer {
+  padding: 4rem 0 2rem;
+  background: var(--dark, #0a0a0a);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+.footer__brand p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+  margin-top: 1rem;
+}
+.footer__col-title {
+  font-family: var(--font-display, 'Outfit', sans-serif);
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+  color: #fff;
+}
+.footer__links { list-style: none; padding: 0; margin: 0; }
+.footer__links li { margin-bottom: 0.6rem; }
+.footer__links a {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  transition: color 0.3s;
+  text-decoration: none;
+}
+.footer__links a:hover { color: var(--red, #D43030); }
+.footer__contact p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+.footer__bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+}
+@media (max-width: 768px) {
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+@media (max-width: 480px) {
+  .footer__grid { grid-template-columns: 1fr; }
+  .footer__bar { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+
+  </style>
 </head>
 <body>
 
@@ -756,24 +929,27 @@
          HEADER
          ======================================== -->
     <header class="header" id="header">
-        <div class="container">
-            <a href="/" class="logo">Auto Detail <span>MTY</span></a>
-            <nav class="nav" id="nav">
-                <a href="/ppf.html" class="active">PPF</a>
-                <a href="/ceramicos.html">Cerámica</a>
-                <a href="/wrap.html">Wraps</a>
-                <a href="/polarizados.html">Polarizado</a>
-                <a href="/accesorios-4x4.html">Accesorios 4×4</a>
-                <a href="/nosotros.html">Nosotros</a>
-                <a href="/contacto.html" class="btn-primary">Contacto</a>
-            </nav>
-            <div class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </header>
+    <div class="container">
+      <a href="/" class="header__logo">
+        Auto<span>Detail</span>®
+        <small>Monterrey</small>
+      </a>
+      <nav class="header__nav" id="nav">
+        <a href="/ppf.html" class="active">PPF</a>
+        <a href="/ceramicos.html">Cerámica</a>
+        <a href="/wrap.html">Wraps</a>
+        <a href="/polarizados.html">Polarizado</a>
+        <a href="/accesorios-4x4.html">Accesorios 4×4</a>
+        <a href="/nosotros.html">Nosotros</a>
+      </nav>
+      <div class="header__cta">
+        <a href="/contacto.html" class="btn btn-primary">Contacto</a>
+      </div>
+      <button class="header__hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
 
     <!-- ========================================
          HERO SECTION
@@ -865,55 +1041,53 @@
          FOOTER
          ======================================== -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- Brand -->
-                <div class="footer-brand">
-                    <div class="logo">Auto Detail <span>MTY</span></div>
-                    <p>Especialistas en protección y estética automotriz en Monterrey. PPF, cerámica, wraps y más.</p>
-                </div>
-
-                <!-- Enlaces Rápidos -->
-                <div class="footer-col">
-                    <h4>Enlaces Rápidos</h4>
-                    <ul>
-                        <li><a href="/ppf.html">PPF</a></li>
-                        <li><a href="/ceramicos.html">Cerámica</a></li>
-                        <li><a href="/wrap.html">Wraps</a></li>
-                        <li><a href="/polarizados.html">Polarizado</a></li>
-                        <li><a href="/accesorios-4x4.html">Accesorios 4×4</a></li>
-                        <li><a href="/nosotros.html">Nosotros</a></li>
-                        <li><a href="/contacto.html">Contacto</a></li>
-                    </ul>
-                </div>
-
-                <!-- Horarios -->
-                <div class="footer-col">
-                    <h4>Horarios</h4>
-                    <p>Lunes a Viernes<br>9:00 AM — 6:00 PM</p>
-                    <br>
-                    <p>Sábado<br>9:00 AM — 2:00 PM</p>
-                    <br>
-                    <p>Domingo<br>Cerrado</p>
-                </div>
-
-                <!-- Ubicación -->
-                <div class="footer-col">
-                    <h4>Ubicación</h4>
-                    <p>Monterrey, Nuevo León, México</p>
-                    <br>
-                    <p>
-                        <a href="tel:+528134000957" style="color: var(--gray);">+52 813 400 0957</a>
-                    </p>
-                </div>
-            </div>
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="header__logo" style="pointer-events:none;">
+            Auto<span>Detail</span>®
+            <small>Monterrey</small>
+          </div>
+          <p>Protección vehicular premium y accesorios off-road. San Pedro Garza García, N.L.</p>
         </div>
-        <div class="footer-bottom">
-            <div class="container">
-                <p>&copy; 2026 Auto Detail Monterrey. Todos los derechos reservados.</p>
-            </div>
+        <div>
+          <h4 class="footer__col-title">Servicios</h4>
+          <ul class="footer__links">
+            <li><a href="/ppf.html">PPF (Paint Protection Film)</a></li>
+            <li><a href="/ceramicos.html">Recubrimiento Cerámico</a></li>
+            <li><a href="/wrap.html">Wraps / Cambio de Color</a></li>
+            <li><a href="/polarizados.html">Polarizado Premium</a></li>
+            <li><a href="/accesorios-4x4.html">Accesorios 4×4 & Off Road</a></li>
+          </ul>
         </div>
-    </footer>
+        <div>
+          <h4 class="footer__col-title">Empresa</h4>
+          <ul class="footer__links">
+            <li><a href="/nosotros.html">Nosotros</a></li>
+            <li><a href="/contacto.html">Contacto</a></li>
+          </ul>
+          <h4 class="footer__col-title" style="margin-top:1.5rem;">Horarios</h4>
+          <div class="footer__contact">
+            <p>Lunes a Viernes: 9:00 — 18:00</p>
+            <p>Sábado: 9:00 — 14:00</p>
+            <p>Domingo: Cerrado</p>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__col-title">Contacto</h4>
+          <div class="footer__contact">
+            <p>San Pedro Garza García<br>Nuevo León, México</p>
+            <p><a href="tel:+528134000957" style="color:inherit;">+52 81 3400 0957</a></p>
+            <p><a href="mailto:info@autodetailmty.com" style="color:inherit;">info@autodetailmty.com</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bar">
+        <span>© 2026 Auto Detail Monterrey. Todos los derechos reservados.</span>
+        <span>San Pedro Garza García, N.L.</span>
+      </div>
+    </div>
+  </footer>
 
     <!-- ========================================
          WHATSAPP FLOAT
@@ -926,30 +1100,24 @@
          JAVASCRIPT
          ======================================== -->
     <script>
-        // Header scroll effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 60) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+    // Header scroll effect
+    const header = document.getElementById('header');
+    if (header) {
+      window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+      });
+    }
 
-        // Mobile menu toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const nav = document.getElementById('nav');
-        menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('open');
-        });
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    if (hamburger && nav) {
+      hamburger.addEventListener('click', () => {
+        nav.classList.toggle('open');
+      });
+    }
 
-        // Close mobile menu on link click
-        nav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('open');
-            });
-        });
-
+    // Close mobile menu on link click
         // Scroll reveal
         const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
 
@@ -966,6 +1134,6 @@
         });
 
         revealElements.forEach(el => revealObserver.observe(el));
-    </script>
+  </script>
 </body>
 </html>

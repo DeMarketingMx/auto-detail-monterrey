@@ -543,25 +543,205 @@
       .footer-grid { grid-template-columns: 1fr; gap: 40px; }
       .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
     }
+  
+/* ══════════════════════════════════════
+   STANDARD HEADER
+══════════════════════════════════════ */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+  transition: background 0.4s ease, padding 0.4s ease;
+}
+.header.scrolled {
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(20px);
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header__logo {
+  font-family: var(--font-display, 'Outfit', sans-serif);
+  font-weight: 800;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #fff;
+  text-decoration: none;
+}
+.header__logo span { color: var(--red, #D43030); }
+.header__logo small {
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  display: block;
+}
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+.header__nav a {
+  font-family: var(--font-display, 'Outfit', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: rgba(255,255,255,0.8);
+  transition: color 0.3s;
+  position: relative;
+  text-decoration: none;
+}
+.header__nav a:hover { color: #fff; }
+.header__nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--red, #D43030);
+  transition: width 0.3s ease;
+}
+.header__nav a:hover::after { width: 100%; }
+.header__nav a.active { color: #fff; }
+.header__nav a.active::after { width: 100%; }
+.header__cta .btn {
+  padding: 0.65rem 1.75rem;
+  font-size: 0.8rem;
+}
+.header__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.header__hamburger span {
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  transition: 0.3s;
+}
+
+/* Mobile nav */
+@media (max-width: 768px) {
+  .header__nav { display: none; }
+  .header__nav.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.97);
+    padding: 1.5rem;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .header__cta { display: none; }
+  .header__cta.mobile-show {
+    display: block;
+  }
+  .header__hamburger { display: flex; }
+}
+
+/* ══════════════════════════════════════
+   STANDARD FOOTER
+══════════════════════════════════════ */
+.footer {
+  padding: 4rem 0 2rem;
+  background: var(--dark, #0a0a0a);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+.footer__brand p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+  margin-top: 1rem;
+}
+.footer__col-title {
+  font-family: var(--font-display, 'Outfit', sans-serif);
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+  color: #fff;
+}
+.footer__links { list-style: none; padding: 0; margin: 0; }
+.footer__links li { margin-bottom: 0.6rem; }
+.footer__links a {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  transition: color 0.3s;
+  text-decoration: none;
+}
+.footer__links a:hover { color: var(--red, #D43030); }
+.footer__contact p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+.footer__bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+}
+@media (max-width: 768px) {
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+@media (max-width: 480px) {
+  .footer__grid { grid-template-columns: 1fr; }
+  .footer__bar { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+
   </style>
 </head>
 <body>
 
   <!-- ════════ HEADER ════════ -->
-  <header class="header">
-    <a href="/" class="header-logo">AUTO DETAIL <span>MTY</span></a>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.header-nav').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="header-nav">
-      <a href="/ppf.html">PPF</a>
-      <a href="/ceramicos.html">Cer&aacute;mica</a>
-      <a href="/wrap.html" class="active">Wraps</a>
-      <a href="/polarizados.html">Polarizado</a>
-      <a href="/accesorios-4x4.html">Accesorios 4&times;4</a>
-      <a href="/nosotros.html">Nosotros</a>
-      <a href="/contacto.html" class="header-cta">Contacto</a>
-    </nav>
+  <header class="header" id="header">
+    <div class="container">
+      <a href="/" class="header__logo">
+        Auto<span>Detail</span>®
+        <small>Monterrey</small>
+      </a>
+      <nav class="header__nav" id="nav">
+        <a href="/ppf.html">PPF</a>
+        <a href="/ceramicos.html">Cerámica</a>
+        <a href="/wrap.html" class="active">Wraps</a>
+        <a href="/polarizados.html">Polarizado</a>
+        <a href="/accesorios-4x4.html">Accesorios 4×4</a>
+        <a href="/nosotros.html">Nosotros</a>
+      </nav>
+      <div class="header__cta">
+        <a href="/contacto.html" class="btn btn-primary">Contacto</a>
+      </div>
+      <button class="header__hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
 
   <!-- ════════ HERO ════════ -->
@@ -642,52 +822,51 @@
 
   <!-- ════════ FOOTER ════════ -->
   <footer class="footer">
-    <div class="footer-grid">
-
-      <!-- Brand -->
-      <div class="footer-brand">
-        <h3>AUTO DETAIL <span>MTY</span></h3>
-        <p>Especialistas en protecci&oacute;n y est&eacute;tica automotriz en San Pedro Garza Garc&iacute;a, Monterrey.</p>
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="header__logo" style="pointer-events:none;">
+            Auto<span>Detail</span>®
+            <small>Monterrey</small>
+          </div>
+          <p>Protección vehicular premium y accesorios off-road. San Pedro Garza García, N.L.</p>
+        </div>
+        <div>
+          <h4 class="footer__col-title">Servicios</h4>
+          <ul class="footer__links">
+            <li><a href="/ppf.html">PPF (Paint Protection Film)</a></li>
+            <li><a href="/ceramicos.html">Recubrimiento Cerámico</a></li>
+            <li><a href="/wrap.html">Wraps / Cambio de Color</a></li>
+            <li><a href="/polarizados.html">Polarizado Premium</a></li>
+            <li><a href="/accesorios-4x4.html">Accesorios 4×4 & Off Road</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__col-title">Empresa</h4>
+          <ul class="footer__links">
+            <li><a href="/nosotros.html">Nosotros</a></li>
+            <li><a href="/contacto.html">Contacto</a></li>
+          </ul>
+          <h4 class="footer__col-title" style="margin-top:1.5rem;">Horarios</h4>
+          <div class="footer__contact">
+            <p>Lunes a Viernes: 9:00 — 18:00</p>
+            <p>Sábado: 9:00 — 14:00</p>
+            <p>Domingo: Cerrado</p>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__col-title">Contacto</h4>
+          <div class="footer__contact">
+            <p>San Pedro Garza García<br>Nuevo León, México</p>
+            <p><a href="tel:+528134000957" style="color:inherit;">+52 81 3400 0957</a></p>
+            <p><a href="mailto:info@autodetailmty.com" style="color:inherit;">info@autodetailmty.com</a></p>
+          </div>
+        </div>
       </div>
-
-      <!-- Enlaces R&aacute;pidos -->
-      <div class="footer-col">
-        <h4>Enlaces</h4>
-        <ul>
-          <li><a href="/ppf.html">PPF</a></li>
-          <li><a href="/ceramicos.html">Cer&aacute;mica</a></li>
-          <li><a href="/wrap.html">Wraps</a></li>
-          <li><a href="/polarizados.html">Polarizado</a></li>
-          <li><a href="/accesorios-4x4.html">Accesorios 4&times;4</a></li>
-          <li><a href="/nosotros.html">Nosotros</a></li>
-        </ul>
+      <div class="footer__bar">
+        <span>© 2026 Auto Detail Monterrey. Todos los derechos reservados.</span>
+        <span>San Pedro Garza García, N.L.</span>
       </div>
-
-      <!-- Horarios -->
-      <div class="footer-col">
-        <h4>Horarios</h4>
-        <ul>
-          <li>Lunes a Viernes: 9:00 &ndash; 18:00</li>
-          <li>S&aacute;bado: 9:00 &ndash; 14:00</li>
-          <li>Domingo: Cerrado</li>
-        </ul>
-      </div>
-
-      <!-- Ubicaci&oacute;n -->
-      <div class="footer-col">
-        <h4>Ubicaci&oacute;n</h4>
-        <ul>
-          <li>San Pedro Garza Garc&iacute;a</li>
-          <li>Monterrey, N.L., M&eacute;xico</li>
-          <li style="margin-top:8px;"><a href="https://wa.me/528134000957" target="_blank" rel="noopener" style="color:var(--red);">+52 813 400 0957</a></li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="footer-bottom">
-      <p>&copy; 2026 Auto Detail Monterrey. Todos los derechos reservados.</p>
-      <p>San Pedro Garza Garc&iacute;a, N.L.</p>
     </div>
   </footer>
 
@@ -698,6 +877,23 @@
 
   <!-- ════════ Scroll Reveal JS ════════ -->
   <script>
+    // Header scroll effect
+    const header = document.getElementById('header');
+    if (header) {
+      window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+      });
+    }
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    if (hamburger && nav) {
+      hamburger.addEventListener('click', () => {
+        nav.classList.toggle('open');
+      });
+    }
+
     const revealElements = document.querySelectorAll('.reveal');
     const revealOnScroll = () => {
       const windowHeight = window.innerHeight;

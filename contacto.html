@@ -383,25 +383,202 @@
     @media (max-width: 480px) {
       .form-card { padding: 1.5rem; }
     }
+  
+/* ══════════════════════════════════════
+   STANDARD HEADER
+══════════════════════════════════════ */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+  transition: background 0.4s ease, padding 0.4s ease;
+}
+.header.scrolled {
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(20px);
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header__logo {
+  font-family: var(--font-display, 'Outfit', sans-serif);
+  font-weight: 800;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #fff;
+  text-decoration: none;
+}
+.header__logo span { color: var(--red, #D43030); }
+.header__logo small {
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  display: block;
+}
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+.header__nav a {
+  font-family: var(--font-display, 'Outfit', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: rgba(255,255,255,0.8);
+  transition: color 0.3s;
+  position: relative;
+  text-decoration: none;
+}
+.header__nav a:hover { color: #fff; }
+.header__nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--red, #D43030);
+  transition: width 0.3s ease;
+}
+.header__nav a:hover::after { width: 100%; }
+.header__nav a.active { color: #fff; }
+.header__nav a.active::after { width: 100%; }
+.header__cta .btn {
+  padding: 0.65rem 1.75rem;
+  font-size: 0.8rem;
+}
+.header__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.header__hamburger span {
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  transition: 0.3s;
+}
+
+/* Mobile nav */
+@media (max-width: 768px) {
+  .header__nav { display: none; }
+  .header__nav.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.97);
+    padding: 1.5rem;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .header__cta { display: none; }
+  .header__cta.mobile-show {
+    display: block;
+  }
+  .header__hamburger { display: flex; }
+}
+
+/* ══════════════════════════════════════
+   STANDARD FOOTER
+══════════════════════════════════════ */
+.footer {
+  padding: 4rem 0 2rem;
+  background: var(--dark, #0a0a0a);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+.footer__brand p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+  margin-top: 1rem;
+}
+.footer__col-title {
+  font-family: var(--font-display, 'Outfit', sans-serif);
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+  color: #fff;
+}
+.footer__links { list-style: none; padding: 0; margin: 0; }
+.footer__links li { margin-bottom: 0.6rem; }
+.footer__links a {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  transition: color 0.3s;
+  text-decoration: none;
+}
+.footer__links a:hover { color: var(--red, #D43030); }
+.footer__contact p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+.footer__bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+}
+@media (max-width: 768px) {
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+@media (max-width: 480px) {
+  .footer__grid { grid-template-columns: 1fr; }
+  .footer__bar { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+
   </style>
 </head>
 <body>
 
   <!-- ===== Header ===== -->
-  <header class="header">
+  <header class="header" id="header">
     <div class="container">
-      <a href="/" class="logo">AUTO DETAIL<span>MTY</span></a>
-      <nav class="nav" id="mainNav">
-        <a href="/">Inicio</a>
+      <a href="/" class="header__logo">
+        Auto<span>Detail</span>®
+        <small>Monterrey</small>
+      </a>
+      <nav class="header__nav" id="nav">
         <a href="/ppf.html">PPF</a>
         <a href="/ceramicos.html">Cerámica</a>
         <a href="/wrap.html">Wraps</a>
         <a href="/polarizados.html">Polarizado</a>
-        <a href="/accesorios-4x4.html">Accesorios 4x4</a>
+        <a href="/accesorios-4x4.html">Accesorios 4×4</a>
         <a href="/nosotros.html">Nosotros</a>
-        <a href="/contacto.html" class="active">Contacto</a>
       </nav>
-      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+      <div class="header__cta">
+        <a href="/contacto.html" class="btn btn-primary active">Contacto</a>
+      </div>
+      <button class="header__hamburger" id="hamburger" aria-label="Menú">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -512,50 +689,49 @@
   <!-- ===== Footer ===== -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/" class="logo">AUTO DETAIL<span>MTY</span></a>
-          <p>Proteccion vehicular premium en Monterrey. PPF, recubrimiento ceramico, wraps y accesorios 4x4.</p>
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="header__logo" style="pointer-events:none;">
+            Auto<span>Detail</span>®
+            <small>Monterrey</small>
+          </div>
+          <p>Protección vehicular premium y accesorios off-road. San Pedro Garza García, N.L.</p>
         </div>
-        <div class="footer-col">
-          <h4>Servicios</h4>
-          <ul>
-            <li><a href="/ppf.html">Paint Protection Film</a></li>
-            <li><a href="/ceramicos.html">Recubrimiento Ceramico</a></li>
-            <li><a href="/wrap.html">Wraps</a></li>
-            <li><a href="/accesorios-4x4.html">Accesorios 4x4</a></li>
+        <div>
+          <h4 class="footer__col-title">Servicios</h4>
+          <ul class="footer__links">
+            <li><a href="/ppf.html">PPF (Paint Protection Film)</a></li>
+            <li><a href="/ceramicos.html">Recubrimiento Cerámico</a></li>
+            <li><a href="/wrap.html">Wraps / Cambio de Color</a></li>
+            <li><a href="/polarizados.html">Polarizado Premium</a></li>
+            <li><a href="/accesorios-4x4.html">Accesorios 4×4 & Off Road</a></li>
           </ul>
         </div>
-        <div class="footer-col">
-          <h4>Empresa</h4>
-          <ul>
+        <div>
+          <h4 class="footer__col-title">Empresa</h4>
+          <ul class="footer__links">
             <li><a href="/nosotros.html">Nosotros</a></li>
-            <li><a href="/#galeria">Galeria</a></li>
             <li><a href="/contacto.html">Contacto</a></li>
           </ul>
+          <h4 class="footer__col-title" style="margin-top:1.5rem;">Horarios</h4>
+          <div class="footer__contact">
+            <p>Lunes a Viernes: 9:00 — 18:00</p>
+            <p>Sábado: 9:00 — 14:00</p>
+            <p>Domingo: Cerrado</p>
+          </div>
         </div>
-        <div class="footer-col">
-          <h4>Contacto</h4>
-          <ul>
-            <li><a href="mailto:demo@yourweb.com">demo@yourweb.com</a></li>
-            <li><a href="tel:+08002121234567">0800 (212) 123 45 67</a></li>
-            <li>San Pedro Garza Garcia, N.L.</li>
-          </ul>
+        <div>
+          <h4 class="footer__col-title">Contacto</h4>
+          <div class="footer__contact">
+            <p>San Pedro Garza García<br>Nuevo León, México</p>
+            <p><a href="tel:+528134000957" style="color:inherit;">+52 81 3400 0957</a></p>
+            <p><a href="mailto:info@autodetailmty.com" style="color:inherit;">info@autodetailmty.com</a></p>
+          </div>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Auto Detail Monterrey. Todos los derechos reservados.</p>
-        <div class="footer-socials">
-          <a href="#" aria-label="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-          </a>
-          <a href="#" aria-label="Facebook">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          </a>
-          <a href="#" aria-label="TikTok">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-          </a>
-        </div>
+      <div class="footer__bar">
+        <span>© 2026 Auto Detail Monterrey. Todos los derechos reservados.</span>
+        <span>San Pedro Garza García, N.L.</span>
       </div>
     </div>
   </footer>
@@ -567,12 +743,22 @@
 
   <!-- ===== JS ===== -->
   <script>
+    // Header scroll effect
+    const header = document.getElementById('header');
+    if (header) {
+      window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+      });
+    }
+
     // Mobile menu toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const mainNav = document.getElementById('mainNav');
-    menuToggle.addEventListener('click', () => {
-      mainNav.classList.toggle('open');
-    });
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    if (hamburger && nav) {
+      hamburger.addEventListener('click', () => {
+        nav.classList.toggle('open');
+      });
+    }
 
     // Simple form validation feedback
     const form = document.getElementById('contactForm');

@@ -312,6 +312,22 @@
 
     @media (max-width: 768px) {
       .header__nav { display: none; }
+      .header__nav.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,0.97);
+        padding: 1.5rem;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      .header__cta { display: none; }
+      .header__cta.mobile-show {
+        display: block;
+      }
       .header__hamburger { display: flex; }
     }
 
@@ -1904,40 +1920,46 @@
     <div class="container">
       <div class="footer__grid">
         <div class="footer__brand">
-          <div class="header__logo">
+          <div class="header__logo" style="pointer-events:none;">
             Auto<span>Detail</span>®
             <small>Monterrey</small>
           </div>
-          <p>Protección Premium y Accesorios off-road. San Pedro Garza García, N.L.</p>
+          <p>Protección vehicular premium y accesorios off-road. San Pedro Garza García, N.L.</p>
         </div>
         <div>
-          <h4 class="footer__col-title">Enlaces Rápidos</h4>
+          <h4 class="footer__col-title">Servicios</h4>
           <ul class="footer__links">
             <li><a href="/ppf.html">PPF (Paint Protection Film)</a></li>
-            <li><a href="/polarizados.html">Polarizado Premium</a></li>
+            <li><a href="/ceramicos.html">Recubrimiento Cerámico</a></li>
             <li><a href="/wrap.html">Wraps / Cambio de Color</a></li>
+            <li><a href="/polarizados.html">Polarizado Premium</a></li>
             <li><a href="/accesorios-4x4.html">Accesorios 4×4 & Off Road</a></li>
-            <li><a href="/contacto.html">Contacto</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="footer__col-title">Horarios</h4>
+          <h4 class="footer__col-title">Empresa</h4>
+          <ul class="footer__links">
+            <li><a href="/nosotros.html">Nosotros</a></li>
+            <li><a href="/contacto.html">Contacto</a></li>
+          </ul>
+          <h4 class="footer__col-title" style="margin-top:1.5rem;">Horarios</h4>
           <div class="footer__contact">
-            <p>Lunes a Viernes<br>09:00 — 21:00</p>
-            <p>Sábado<br>08:00 — 19:00</p>
-            <p>Domingos: Cerrado</p>
+            <p>Lunes a Viernes: 9:00 — 18:00</p>
+            <p>Sábado: 9:00 — 14:00</p>
+            <p>Domingo: Cerrado</p>
           </div>
         </div>
         <div>
-          <h4 class="footer__col-title">Ubicación</h4>
+          <h4 class="footer__col-title">Contacto</h4>
           <div class="footer__contact">
-            <p>Paseo Belinda 3000<br>San Pedro Garza García<br>Nuevo León, México</p>
-            <p>+52 81 3400 0957</p>
+            <p>San Pedro Garza García<br>Nuevo León, México</p>
+            <p><a href="tel:+528134000957" style="color:inherit;">+52 81 3400 0957</a></p>
+            <p><a href="mailto:info@autodetailmty.com" style="color:inherit;">info@autodetailmty.com</a></p>
           </div>
         </div>
       </div>
       <div class="footer__bar">
-        <span>© 2025 Auto Detail Monterrey. Todos los derechos reservados.</span>
+        <span>© 2026 Auto Detail Monterrey. Todos los derechos reservados.</span>
         <span>San Pedro Garza García, N.L.</span>
       </div>
     </div>
@@ -1952,9 +1974,20 @@
   <script>
     // Header scroll effect
     const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 50);
-    });
+    if (header) {
+      window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+      });
+    }
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    if (hamburger && nav) {
+      hamburger.addEventListener('click', () => {
+        nav.classList.toggle('open');
+      });
+    }
 
     // Parallax on hero halves
     const parallaxBgs = document.querySelectorAll('[data-parallax]');
