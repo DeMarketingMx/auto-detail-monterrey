@@ -345,8 +345,8 @@
     ══════════════════════════════════════ */
     .hero {
       position: relative;
-      height: 100vh;
-      min-height: 700px;
+      height: 88vh;
+      min-height: 600px;
       overflow: hidden;
       background: var(--black);
     }
@@ -373,25 +373,21 @@
     /* Background images with parallax + zoom */
     .hero__half-bg {
       position: absolute;
-      inset: -20px;
+      inset: 0;
       background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      background-repeat: no-repeat;
       transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       will-change: transform;
-    }
-    @media (max-width: 768px) {
-      .hero__half-bg { background-attachment: scroll; }
     }
     .hero__half--left .hero__half-bg {
       background-color: #0d0d0d;
       background-image: url('assets/images/taller-mclaren.jpg');
-      background-position: center 65%;
+      background-position: center 75%;
     }
     .hero__half--right .hero__half-bg {
       background-color: #151515;
       background-image: url('assets/images/4x4-ram-trx-frontal.jpg');
-      background-position: center 55%;
+      background-position: center 65%;
     }
     .hero__half:hover .hero__half-bg {
       transform: scale(1.06);
