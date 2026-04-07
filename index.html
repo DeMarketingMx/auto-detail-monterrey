@@ -1027,53 +1027,76 @@
     }
     .gallery__grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: auto auto;
-      gap: 0;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 280px 280px 320px;
+      gap: 12px;
       width: 100%;
     }
     .gallery__item {
-      aspect-ratio: 4/3;
       background: var(--dark-3);
       overflow: hidden;
       position: relative;
       cursor: pointer;
+      border-radius: 12px;
     }
-    .gallery__item img {
+    .gallery__item img,
+    .gallery__item video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s ease;
+      transition: transform 0.6s ease, filter 0.4s ease;
     }
-    .gallery__item:hover img { transform: scale(1.05); }
+    .gallery__item:hover img,
+    .gallery__item:hover video { transform: scale(1.05); }
     .gallery__item::after {
       content: attr(data-label);
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 40%, transparent 60%);
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 50%, transparent 70%);
       opacity: 0;
       transition: opacity 0.4s;
       display: flex;
       align-items: flex-end;
-      padding: 1.5rem;
+      padding: 1.25rem;
       font-family: var(--font-display);
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--white);
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
+      border-radius: 12px;
     }
     .gallery__item:hover::after { opacity: 1; }
-    .gallery__item--span2 {
-      grid-column: span 2;
-    }
-    /* Placeholder state */
-    .gallery__item--placeholder {
-      background: linear-gradient(135deg, #1a1a1a 0%, #222 50%, #1a1a1a 100%);
+    .gallery__item--span2 { grid-column: span 2; }
+    .gallery__item--span-row { grid-row: span 2; }
+    .gallery__item--video { position: relative; }
+    .gallery__item--video::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px;
+      height: 52px;
+      background: var(--red);
+      border-radius: 50%;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
     }
 
-    @media (max-width: 640px) {
-      .gallery__grid { grid-template-columns: 1fr 1fr; }
-      .gallery__item--span2 { grid-column: span 2; }
+    @media (max-width: 900px) {
+      .gallery__grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+      }
+      .gallery__item { min-height: 220px; }
+      .gallery__item--span-row { grid-row: span 1; }
+    }
+    @media (max-width: 480px) {
+      .gallery__grid { grid-template-columns: 1fr; gap: 8px; }
+      .gallery__item { min-height: 200px; }
+      .gallery__item--span2 { grid-column: span 1; }
     }
 
     /* ══════════════════════════════════════
@@ -1654,7 +1677,7 @@
           </div>
           <div class="services__center-bar"></div>
           <div class="services__center-car">
-            [IMAGEN — Carro rojo frontal]
+            <img src="assets/images/wrap-mustang-rojo.jpg" alt="Mustang rojo con wrap en Auto Detail Monterrey" style="width:100%;height:auto;object-fit:cover;">
             <div class="services__center-cta">
               <a href="/contacto.html" class="btn">
                 Contáctanos
@@ -1681,7 +1704,7 @@
   <section class="why-us">
     <div class="container">
       <div class="why-us__image reveal-left">
-        <div class="why-us__img-placeholder">[IMAGEN — Taller / Instalación]</div>
+        <img src="assets/images/taller-maserati-mc20.jpg" alt="Maserati MC20 en taller Auto Detail Monterrey" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="why-us__content reveal-right">
         <div class="section-label">Auto Detail Monterrey</div>
@@ -1747,11 +1770,8 @@
         </div>
       </div>
       <div class="standards__visual reveal-right">
-        <div class="standards__img-placeholder">
-          [VIDEO — PPF Brillando]
-          <div class="standards__play">
-            <svg viewBox="0 0 448 512"><path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"/></svg>
-          </div>
+        <div class="standards__img-placeholder" style="position:relative;">
+          <video src="assets/videos/video-01.mp4" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;"></video>
         </div>
       </div>
     </div>
@@ -1768,10 +1788,33 @@
         </p>
       </div>
       <div class="gallery__grid">
-        <div class="gallery__item gallery__item--span2 gallery__item--placeholder reveal-scale" data-label="Recubrimiento Cerámico"><!-- <img src="ceramico.jpg" alt="Cerámico"> --></div>
-        <div class="gallery__item gallery__item--placeholder reveal-scale delay-1" data-label="PPF XPEL"><!-- <img src="ppf.jpg" alt="PPF"> --></div>
-        <div class="gallery__item gallery__item--placeholder reveal-scale delay-2" data-label="Wrap / Cambio de Color"><!-- <img src="wrap.jpg" alt="Wrap"> --></div>
-        <div class="gallery__item gallery__item--span2 gallery__item--placeholder reveal-scale delay-3" data-label="Accesorios 4×4 & Off-Road"><!-- <img src="4x4.jpg" alt="4x4"> --></div>
+        <!-- Row 1 -->
+        <div class="gallery__item gallery__item--span-row reveal-scale" data-label="Recubrimiento Cerámico">
+          <img src="assets/images/taller-tesla-model3.jpg" alt="Tesla Model 3 con recubrimiento cerámico">
+        </div>
+        <div class="gallery__item gallery__item--span2 reveal-scale delay-1" data-label="Wrap Premium">
+          <img src="assets/images/wrap-bmw-m240i-azul.jpg" alt="BMW M240i con wrap azul mate">
+        </div>
+        <div class="gallery__item reveal-scale delay-2" data-label="PPF XPEL">
+          <img src="assets/images/ppf-instalacion-xpel.jpg" alt="Instalación PPF XPEL">
+        </div>
+        <!-- Row 2 -->
+        <div class="gallery__item reveal-scale delay-1" data-label="Maserati MC20">
+          <img src="assets/images/taller-maserati-mc20-puertas.jpg" alt="Maserati MC20 en Auto Detail Monterrey">
+        </div>
+        <div class="gallery__item reveal-scale delay-2" data-label="Showroom">
+          <video src="assets/videos/video-08.mp4" autoplay muted loop playsinline></video>
+        </div>
+        <!-- Row 3 -->
+        <div class="gallery__item gallery__item--span2 reveal-scale delay-2" data-label="Accesorios 4×4 & Off-Road">
+          <img src="assets/images/4x4-jac-bullbar.jpg" alt="JAC con accesorios 4x4 XPEL">
+        </div>
+        <div class="gallery__item reveal-scale delay-3" data-label="Porsche Cayman">
+          <img src="assets/images/taller-porsche-cayman.jpg" alt="Porsche Cayman en Auto Detail Monterrey">
+        </div>
+        <div class="gallery__item reveal-scale delay-3" data-label="Land Rover Defender">
+          <img src="assets/images/taller-defender.jpg" alt="Land Rover Defender en Auto Detail Monterrey">
+        </div>
       </div>
     </div>
   </section>
