@@ -19,6 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <script>var t=localStorage.getItem('ad-theme');if(t)document.documentElement.setAttribute('data-theme',t);</script>
   <style>
     /* ── Design Tokens ── */
     :root {
@@ -743,14 +744,21 @@
 @media (max-width: 768px) {
   [data-theme="light"] .header__nav.open { background: rgba(255,255,255,0.97); border-bottom-color: rgba(0,0,0,0.08); }
 }
+/* Hero — text stays white because it's on full-screen video with dark overlay */
 [data-theme="light"] .hero { background: #f5f5f5; }
-[data-theme="light"] .feature-card { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); }
-[data-theme="light"] .feature-card:hover { background: rgba(212,48,48,0.06); border-color: rgba(212,48,48,0.25); }
-[data-theme="light"] .feature-card__desc { color: #666; }
-[data-theme="light"] .hero__video { background: #e5e5e5; border-color: rgba(0,0,0,0.08); }
-[data-theme="light"] .hero__paragraph { color: #555; }
-[data-theme="light"] .hero__video-label { color: #666; }
-[data-theme="light"] .btn--outline { color: #333; border-color: rgba(0,0,0,0.2); }
+[data-theme="light"] .hero__heading,
+[data-theme="light"] .hero__paragraph,
+[data-theme="light"] .hero__badge,
+[data-theme="light"] .hero__text,
+[data-theme="light"] .hero__content { color: #fff; }
+[data-theme="light"] .hero__paragraph { color: rgba(255,255,255,0.75); }
+[data-theme="light"] .hero__video-label { color: rgba(255,255,255,0.7); }
+[data-theme="light"] .feature-card { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); }
+[data-theme="light"] .feature-card:hover { background: rgba(212,48,48,0.12); border-color: rgba(212,48,48,0.3); }
+[data-theme="light"] .feature-card__title { color: #fff; }
+[data-theme="light"] .feature-card__desc { color: rgba(255,255,255,0.7); }
+[data-theme="light"] .hero__video { background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.1); }
+[data-theme="light"] .btn--outline { color: #fff; border-color: rgba(255,255,255,0.3); }
 [data-theme="light"] .btn--outline:hover { border-color: var(--red); color: var(--red); }
 [data-theme="light"] .footer { background: #111; border-top-color: rgba(255,255,255,0.05); }
 [data-theme="light"] .footer .header__logo { color: #fff; }
