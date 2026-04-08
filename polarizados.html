@@ -32,7 +32,7 @@
       --ease: cubic-bezier(.25,.46,.45,.94);
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       font-family: var(--font-body);
@@ -326,6 +326,19 @@
   opacity: 0.6;
   display: block;
 }
+.header__logo-img {
+  height: 32px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
+}
+[data-theme="light"] .header__logo-img { filter: none; }
+.footer__logo-img {
+  height: 32px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  margin-bottom: 1rem;
+}
 .header__nav {
   display: flex;
   align-items: center;
@@ -535,8 +548,7 @@
   <header class="header" id="header">
     <div class="container">
       <a href="/" class="header__logo">
-        Auto<span>Detail</span>®
-        <small>Monterrey</small>
+        <img src="/assets/images/logo-autodetail.png" alt="Auto Detail Monterrey" class="header__logo-img">
       </a>
       <nav class="header__nav" id="nav">
         <a href="/ppf.html">PPF</a>
@@ -647,10 +659,7 @@
     <div class="container">
       <div class="footer__grid">
         <div class="footer__brand">
-          <div class="header__logo" style="pointer-events:none;">
-            Auto<span>Detail</span>®
-            <small>Monterrey</small>
-          </div>
+          <img src="/assets/images/logo-autodetail.png" alt="Auto Detail Monterrey" class="footer__logo-img">
           <p>Protección vehicular premium y accesorios off-road. San Pedro Garza García, N.L.</p>
         </div>
         <div>
