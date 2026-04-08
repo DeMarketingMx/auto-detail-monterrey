@@ -454,6 +454,57 @@
   .footer__bar { flex-direction: column; gap: 0.5rem; text-align: center; }
 }
 
+/* ══ Theme Toggle ══ */
+.theme-toggle {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: 0.3s ease;
+  margin-right: 0.75rem; flex-shrink: 0;
+}
+.theme-toggle:hover { border-color: var(--red, #D43030); background: rgba(212,48,48,0.08); }
+.theme-toggle svg { width: 18px; height: 18px; transition: transform 0.4s ease; }
+.theme-toggle:hover svg { transform: rotate(30deg); }
+.theme-toggle .icon-moon { display: block; stroke: #fff; fill: none; stroke-width: 2; }
+.theme-toggle .icon-sun  { display: none;  stroke: #111; fill: none; stroke-width: 2; }
+
+[data-theme="light"] .theme-toggle { border-color: rgba(0,0,0,0.15); }
+[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+[data-theme="light"] .theme-toggle .icon-sun  { display: block; }
+[data-theme="light"] body { background: #ffffff; color: #111; }
+[data-theme="light"] .header.scrolled { background: rgba(255,255,255,0.95); border-bottom-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .header__logo { color: #111; }
+[data-theme="light"] .header__nav a { color: rgba(0,0,0,0.7); }
+[data-theme="light"] .header__nav a:hover { color: #111; }
+[data-theme="light"] .header__hamburger span { background: #111; }
+@media (max-width: 768px) {
+  [data-theme="light"] .header__nav.open { background: rgba(255,255,255,0.97); border-bottom-color: rgba(0,0,0,0.08); }
+}
+[data-theme="light"] .contact-hero { background: #ffffff; }
+[data-theme="light"] .contact-info h1 { color: #111; }
+[data-theme="light"] .contact-info .subtitle { color: #555; }
+[data-theme="light"] .contact-item-icon { background: #f5f5f5; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .contact-item-icon svg { stroke: var(--red); }
+[data-theme="light"] .contact-item-label { color: #888; }
+[data-theme="light"] .contact-item-value { color: #111; }
+[data-theme="light"] .form-card { background: #f5f5f5; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .form-card h2 { color: #111; }
+[data-theme="light"] .form-card .form-sub { color: #666; }
+[data-theme="light"] .form-group label { color: #555; }
+[data-theme="light"] .form-group input,
+[data-theme="light"] .form-group textarea { background: #fff; border-color: rgba(0,0,0,0.12); color: #111; }
+[data-theme="light"] .form-group input::placeholder,
+[data-theme="light"] .form-group textarea::placeholder { color: #999; }
+[data-theme="light"] .form-group input:focus,
+[data-theme="light"] .form-group textarea:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(212,48,48,0.1); }
+[data-theme="light"] .cta-banner { background: #f5f5f5; }
+[data-theme="light"] .cta-banner h2 { color: #111; }
+[data-theme="light"] .cta-banner p { color: #555; }
+[data-theme="light"] .footer { background: #111; border-top-color: rgba(255,255,255,0.05); }
+[data-theme="light"] .footer .header__logo { color: #fff; }
+
   </style>
 </head>
 <body>
@@ -473,7 +524,11 @@
         <a href="/accesorios-4x4.html">Accesorios 4×4</a>
         <a href="/nosotros.html">Nosotros</a>
       </nav>
-      <div class="header__cta">
+      <div class="header__cta" style="display:flex;align-items:center;">
+        <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+          <svg class="icon-moon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
         <a href="/contacto.html" class="btn btn-primary active">Contacto</a>
       </div>
       <button class="header__hamburger" id="hamburger" aria-label="Menú">
@@ -672,6 +727,20 @@
       alert('Gracias por tu mensaje. Te contactaremos en menos de 24 horas.');
       form.reset();
     });
+    // Theme toggle
+    (function() {
+      var saved = localStorage.getItem('ad-theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      var toggle = document.getElementById('themeToggle');
+      if (toggle) {
+        toggle.addEventListener('click', function() {
+          var current = document.documentElement.getAttribute('data-theme');
+          var next = current === 'light' ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('ad-theme', next);
+        });
+      }
+    })();
   </script>
 
 </body>
