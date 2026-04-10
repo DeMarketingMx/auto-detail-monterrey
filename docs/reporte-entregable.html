@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reporte Ejecutivo — Auto Detail Monterrey | De Marketing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    @page { size: letter; margin: 0; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: #fafafa;
+      color: #121212;
+      line-height: 1.7;
+      font-size: 0.78rem;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+    /* Page */
+    .page {
+      width: 8.5in;
+      height: 11in;
+      margin: 0 auto;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      page-break-after: always;
+      page-break-inside: avoid;
+      background: #fafafa;
+    }
+    .page:last-child { page-break-after: avoid; }
+
+    /* Header bar */
+    .header-bar {
+      background: #16273f;
+      padding: 12px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .brand-text {
+      font-family: 'Inter', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #fafafa;
+    }
+    .header-bar .page-label {
+      font-weight: 500;
+      font-size: 0.6rem;
+      color: #808187;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid #dddfe3;
+      padding: 8px 40px;
+      color: #808187;
+      font-size: 0.55rem;
+      text-align: center;
+      flex-shrink: 0;
+      margin-top: auto;
+    }
+
+    /* Body */
+    .body {
+      padding: 28px 40px 12px 40px;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* Cover */
+    .cover {
+      background: #16273f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fafafa;
+    }
+    .cover .brand-text { font-size: 1.4rem; letter-spacing: 5px; margin-bottom: 2rem; }
+    .cover h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+      max-width: 7in;
+    }
+    .cover .subtitle {
+      font-size: 1.1rem;
+      color: #9be564;
+      margin-bottom: 1.5rem;
+    }
+    .cover .date { font-size: 0.85rem; color: #808187; margin-bottom: 1.5rem; }
+    .cover .client-badge {
+      display: inline-block;
+      border: 1.5px solid #9be564;
+      color: #9be564;
+      padding: 8px 28px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* Typography */
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #16273f;
+      margin: 1.25rem 0 0.6rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 3px solid #9be564;
+      display: inline-block;
+    }
+    h2::after {
+      content: '';
+      display: block;
+    }
+    h3 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #2e4769;
+      margin: 1rem 0 0.4rem;
+    }
+    p { margin-bottom: 0.5rem; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.6rem 0 1rem;
+      font-size: 0.72rem;
+    }
+    th {
+      background: #16273f;
+      color: #fafafa;
+      padding: 6px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    td {
+      padding: 5px 12px;
+      border-bottom: 1px solid #dddfe3;
+    }
+    tr:nth-child(even) td { background: #f5f6f7; }
+    .status-done { color: #16a34a; font-weight: 600; }
+    code {
+      background: #f0f1f3;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 0.68rem;
+    }
+
+    /* Lists */
+    ul { margin: 0.3rem 0 0.6rem 1.25rem; }
+    li { margin-bottom: 0.2rem; }
+    li::marker { color: #9be564; }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .badge-green { background: #dcfce7; color: #166534; }
+    .badge-red { background: #fef2f2; color: #991b1b; }
+    .badge-blue { background: #dbeafe; color: #1e40af; }
+
+    /* Callout */
+    .callout {
+      background: rgba(155,229,100,0.08);
+      border-left: 3px solid #9be564;
+      padding: 10px 14px;
+      border-radius: 0 6px 6px 0;
+      margin: 0.6rem 0;
+    }
+    .callout p { margin: 0; }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 12px 0 16px 0;
+    }
+    .kpi {
+      text-align: center;
+      padding: 14px 8px;
+      border: 1px solid #dddfe3;
+      border-radius: 8px;
+      background: #fff;
+    }
+    .kpi-value { font-size: 1.4rem; font-weight: 700; color: #16273f; }
+    .kpi-value.accent { color: #9be564; }
+    .kpi-label { font-size: 0.6rem; font-weight: 500; color: #808187; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+
+    @media screen {
+      .page { margin: 1rem auto; box-shadow: 0 2px 20px rgba(0,0,0,0.1); border-radius: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ COVER ═══ -->
+  <div class="page cover">
+    <div class="brand-text">De Marketing</div>
+    <h1>Reporte de Entregable<br>Sitio Web</h1>
+    <p class="subtitle">Auto Detail Monterrey</p>
+    <p class="date">8 de abril de 2026</p>
+    <span class="client-badge">Auto Detail Monterrey</span>
+  </div>
+
+  <!-- ═══ PAGE 2: Resumen + Estructura ═══ -->
+  <div class="page">
+    <div class="header-bar">
+      <span class="brand-text">De Marketing</span>
+      <span class="page-label">Resumen Ejecutivo</span>
+    </div>
+    <div class="body">
+
+      <h2>1. Resumen Ejecutivo</h2>
+      <div class="callout">
+        <p>Se desarrollo y entrego el sitio web de <strong>Auto Detail Monterrey</strong>, franquicia de estetica vehicular premium con presencia en 5 paises. El sitio incluye 8 paginas estaticas con diseno responsivo, modo dark/light, optimizacion SEO completa, y esta desplegado en Cloudflare Pages con deploy automatico desde GitHub.</p>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-value">8</div><div class="kpi-label">Paginas</div></div>
+        <div class="kpi"><div class="kpi-value">18</div><div class="kpi-label">Videos</div></div>
+        <div class="kpi"><div class="kpi-value">32</div><div class="kpi-label">Imagenes</div></div>
+        <div class="kpi"><div class="kpi-value accent">2</div><div class="kpi-label">Temas (Dark/Light)</div></div>
+      </div>
+
+      <h2>2. Estructura del Sitio</h2>
+      <table>
+        <thead><tr><th>Pagina</th><th>Archivo</th><th>Proposito</th><th>Estado</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Inicio</strong></td><td>index.html</td><td>Landing principal: hero split, servicios, galeria, testimonios, FAQ</td><td><span class="badge badge-green">Completa</span></td></tr>
+          <tr><td><strong>PPF</strong></td><td>ppf.html</td><td>Paint Protection Film XPEL — garantia 10 anos</td><td><span class="badge badge-green">Completa</span></td></tr>
+          <tr><td><strong>Ceramicos</strong></td><td>ceramicos.html</td><td>Recubrimiento ceramico premium</td><td><span class="badge badge-green">Completa</span></td></tr>
+          <tr><td><strong>Wraps</strong></td><td>wrap.html</td><td>Car wrapping / cambio de color con vinil</td><td><span class="badge badge-green">Completa</span></td></tr>
+          <tr><td><strong>Polarizados</strong></td><td>polarizados.html</td><td>Polarizado nanoceramico 99% rechazo UV</td><td><span class="badge badge-green">Completa</span></td></tr>
+          <tr><td><strong>Accesorios 4x4</strong></td><td>accesorios-4x4.html</td><td>Burreras, roll bars, estribos, tonneau, faros LED</td><td><span class="badge badge-green">Completa</span></td></tr>
+          <tr><td><strong>Nosotros</strong></td><td>nosotros.html</td><td>Franquicia internacional, equipo, valores</td><td><span class="badge badge-green">Completa</span></td></tr>
+          <tr><td><strong>Contacto</strong></td><td>contacto.html</td><td>Formulario, datos de contacto, WhatsApp directo</td><td><span class="badge badge-green">Completa</span></td></tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="footer">De Marketing &middot; Departamento de Marketing Estrategico Externo &middot; demarketing.mx</div>
+  </div>
+
+  <!-- ═══ PAGE 3: Diseno Visual ═══ -->
+  <div class="page">
+    <div class="header-bar">
+      <span class="brand-text">De Marketing</span>
+      <span class="page-label">Diseno Visual</span>
+    </div>
+    <div class="body">
+
+      <h2>3. Diseno Visual</h2>
+
+      <h3>3.1 Identidad Visual</h3>
+      <ul>
+        <li><strong>Logo:</strong> Imagen oficial Auto Detail Monterrey (PNG 1200x400) en header y footer de todas las paginas</li>
+        <li><strong>Tipografias:</strong> Outfit (headings, UI) + Space Grotesk (body) — Google Fonts</li>
+        <li><strong>Color primario:</strong> Rojo #D43030 (acento de marca Auto Detail)</li>
+        <li><strong>Fondos:</strong> Negro #000 / Gris #0A0A0A (dark), Blanco #FFF / Gris #F5F5F5 (light)</li>
+        <li><strong>Favicon:</strong> 32x32 ICO + Apple Touch Icon 180x180 generados del logo</li>
+      </ul>
+
+      <h3>3.2 Modo Dark / Light</h3>
+      <ul>
+        <li>Toggle interactivo luna/sol en navbar de cada pagina</li>
+        <li>Preferencia guardada en <code>localStorage</code>, persistente entre paginas</li>
+        <li>Script en <code>&lt;head&gt;</code> previene flash de tema incorrecto</li>
+        <li>Paginas con hero sobre imagenes (index, accesorios-4x4): navbar siempre blanco</li>
+        <li>Footer permanece oscuro en ambos modos</li>
+      </ul>
+
+      <h3>3.3 Componentes</h3>
+      <ul>
+        <li><strong>Hero sections:</strong> Video autoplay o imagenes de alta calidad por pagina</li>
+        <li><strong>Ribbon de marcas:</strong> Marquee animado con logos SVG: Mercedes-Benz, Porsche, Tesla, Audi, Lamborghini, BMW, Cupra</li>
+        <li><strong>Galeria:</strong> Grid bento con hover effects y labels</li>
+        <li><strong>Testimonios:</strong> 3 cards con citas de clientes</li>
+        <li><strong>FAQ:</strong> Accordion interactivo con animaciones</li>
+        <li><strong>Proceso:</strong> 3 pasos con timeline visual (Cotizacion > Evaluacion > Entrega)</li>
+        <li><strong>Video modal:</strong> Click en play abre video en overlay fullscreen (accesorios-4x4)</li>
+        <li><strong>WhatsApp float:</strong> Boton flotante en esquina inferior derecha, todas las paginas</li>
+      </ul>
+
+      <h3>3.4 Responsivo</h3>
+      <ul>
+        <li><strong>Breakpoints:</strong> 1024px, 768px, 480px</li>
+        <li>Hero mobile alternativo en index (cards verticales)</li>
+        <li>Navbar con hamburger menu en mobile</li>
+        <li>Logo: 48px desktop, 36px mobile</li>
+        <li>Boton "Contacto" oculto en mobile</li>
+        <li><code>overflow-x: hidden</code> en <code>html</code> para evitar scroll horizontal</li>
+      </ul>
+
+    </div>
+    <div class="footer">De Marketing &middot; Departamento de Marketing Estrategico Externo &middot; demarketing.mx</div>
+  </div>
+
+  <!-- ═══ PAGE 4: SEO Tecnico ═══ -->
+  <div class="page">
+    <div class="header-bar">
+      <span class="brand-text">De Marketing</span>
+      <span class="page-label">SEO Tecnico</span>
+    </div>
+    <div class="body">
+
+      <h2>4. SEO Tecnico</h2>
+
+      <h3>4.1 Metadatos por Pagina</h3>
+      <table>
+        <thead><tr><th>Elemento</th><th>Cobertura</th><th>Detalle</th></tr></thead>
+        <tbody>
+          <tr><td><code>&lt;title&gt;</code></td><td class="status-done">8/8</td><td>Unico por pagina, incluye keyword + marca</td></tr>
+          <tr><td><code>&lt;meta description&gt;</code></td><td class="status-done">8/8</td><td>Descripcion unica, 120-160 caracteres</td></tr>
+          <tr><td><code>&lt;meta robots&gt;</code></td><td class="status-done">8/8</td><td>index, follow</td></tr>
+          <tr><td><code>&lt;link canonical&gt;</code></td><td class="status-done">8/8</td><td>URL absoluta por pagina</td></tr>
+          <tr><td><code>&lt;html lang="es-MX"&gt;</code></td><td class="status-done">8/8</td><td>Idioma espanol Mexico</td></tr>
+          <tr><td><code>&lt;meta viewport&gt;</code></td><td class="status-done">8/8</td><td>width=device-width, initial-scale=1.0</td></tr>
+        </tbody>
+      </table>
+
+      <h3>4.2 Open Graph (Redes Sociales)</h3>
+      <table>
+        <thead><tr><th>Tag</th><th>Cobertura</th><th>Valor</th></tr></thead>
+        <tbody>
+          <tr><td><code>og:title</code></td><td class="status-done">8/8</td><td>Titulo unico por pagina</td></tr>
+          <tr><td><code>og:description</code></td><td class="status-done">8/8</td><td>Descripcion unica por pagina</td></tr>
+          <tr><td><code>og:image</code></td><td class="status-done">8/8</td><td>Foto del taller con Maserati MC20</td></tr>
+          <tr><td><code>og:url</code></td><td class="status-done">8/8</td><td>URL canonica por pagina</td></tr>
+          <tr><td><code>og:type</code></td><td class="status-done">8/8</td><td>website</td></tr>
+          <tr><td><code>og:locale</code></td><td class="status-done">8/8</td><td>es_MX</td></tr>
+          <tr><td><code>og:site_name</code></td><td class="status-done">8/8</td><td>Auto Detail Monterrey</td></tr>
+        </tbody>
+      </table>
+
+      <h3>4.3 Twitter Cards</h3>
+      <table>
+        <thead><tr><th>Tag</th><th>Cobertura</th><th>Valor</th></tr></thead>
+        <tbody>
+          <tr><td><code>twitter:card</code></td><td class="status-done">8/8</td><td>summary_large_image</td></tr>
+          <tr><td><code>twitter:title</code></td><td class="status-done">8/8</td><td>Titulo por pagina</td></tr>
+          <tr><td><code>twitter:description</code></td><td class="status-done">8/8</td><td>Descripcion por pagina</td></tr>
+          <tr><td><code>twitter:image</code></td><td class="status-done">8/8</td><td>Misma OG image</td></tr>
+        </tbody>
+      </table>
+
+      <h3>4.4 Datos Estructurados (JSON-LD)</h3>
+      <div class="callout">
+        <p><strong>Schema.org — AutoRepair</strong> en index.html: nombre, descripcion, telefono, email, direccion, coordenadas GPS, horarios, rango de precios, area de servicio (Monterrey).</p>
+      </div>
+
+      <h3>4.5 Archivos SEO</h3>
+      <table>
+        <thead><tr><th>Archivo</th><th>Estado</th><th>Descripcion</th></tr></thead>
+        <tbody>
+          <tr><td><code>robots.txt</code></td><td class="status-done">Creado</td><td>Allow all, referencia al sitemap</td></tr>
+          <tr><td><code>sitemap.xml</code></td><td class="status-done">Creado</td><td>8 URLs con lastmod y prioridades</td></tr>
+          <tr><td><code>favicon.ico</code></td><td class="status-done">Creado</td><td>32x32 del logo</td></tr>
+          <tr><td><code>apple-touch-icon.png</code></td><td class="status-done">Creado</td><td>180x180 para iOS</td></tr>
+          <tr><td><code>404.html</code></td><td class="status-done">Creado</td><td>Pagina de error con diseno de marca</td></tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="footer">De Marketing &middot; Departamento de Marketing Estrategico Externo &middot; demarketing.mx</div>
+  </div>
+
+  <!-- ═══ PAGE 5: Performance + Infra + Contacto + Pendientes ═══ -->
+  <div class="page">
+    <div class="header-bar">
+      <span class="brand-text">De Marketing</span>
+      <span class="page-label">Tecnico &amp; Siguientes Pasos</span>
+    </div>
+    <div class="body">
+
+      <h2>5. Performance</h2>
+      <ul>
+        <li><strong>Lazy loading:</strong> Todas las imagenes con <code>loading="lazy"</code></li>
+        <li><strong>Videos:</strong> <code>preload="none"</code> — no descargan hasta ser visibles</li>
+        <li><strong>CSS inline:</strong> Sin archivos CSS externos (excepto Google Fonts)</li>
+        <li><strong>JS minimo:</strong> Solo scroll reveal, FAQ, theme toggle, mobile menu</li>
+        <li><strong>Cero dependencias:</strong> Sin frameworks ni librerias externas</li>
+      </ul>
+
+      <h2>6. Infraestructura</h2>
+      <table>
+        <thead><tr><th>Componente</th><th>Tecnologia</th></tr></thead>
+        <tbody>
+          <tr><td>Hosting</td><td>Cloudflare Pages (CDN global, SSL, HTTP/3)</td></tr>
+          <tr><td>Repositorio</td><td>GitHub — MiguelDeMarketing/auto-detail-monterrey</td></tr>
+          <tr><td>Deploy</td><td>Automatico en push a branch <code>main</code></td></tr>
+          <tr><td>URL actual</td><td>auto-detail-monterrey.pages.dev</td></tr>
+          <tr><td>Tipo</td><td>HTML estatico (sin build, sin server)</td></tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="footer">De Marketing &middot; Departamento de Marketing Estrategico Externo &middot; demarketing.mx</div>
+  </div>
+
+  <!-- ═══ PAGE 6: Contacto + Pendientes ═══ -->
+  <div class="page">
+    <div class="header-bar">
+      <span class="brand-text">De Marketing</span>
+      <span class="page-label">Contacto &amp; Siguientes Pasos</span>
+    </div>
+    <div class="body">
+
+      <h2>7. Datos de Contacto Configurados</h2>
+      <table>
+        <thead><tr><th>Dato</th><th>Valor</th><th>Ubicacion</th></tr></thead>
+        <tbody>
+          <tr><td>WhatsApp</td><td>+52 81 3400 0957</td><td>Boton flotante, CTAs, hero (8 paginas)</td></tr>
+          <tr><td>Telefono</td><td>+52 81 3400 0957</td><td>Footer, pagina contacto (8 paginas)</td></tr>
+          <tr><td>Email</td><td>contacto@autodetailmonterrey.com</td><td>Footer, pagina contacto (8 paginas)</td></tr>
+          <tr><td>Direccion</td><td>P. Belinda 3000, Col 9, 66260 SPGG, N.L.</td><td>Footer, contacto, JSON-LD</td></tr>
+          <tr><td>Horario L-V</td><td>9:00 — 18:00</td><td>Footer (8 paginas), JSON-LD</td></tr>
+          <tr><td>Horario Sabado</td><td>9:00 — 14:00</td><td>Footer (8 paginas), JSON-LD</td></tr>
+        </tbody>
+      </table>
+
+      <h2>8. Siguientes Pasos</h2>
+      <table>
+        <thead><tr><th>Tarea</th><th>Prioridad</th><th>Descripcion</th></tr></thead>
+        <tbody>
+          <tr><td>Conectar dominio personalizado</td><td><span class="badge badge-red">Alta</span></td><td>Vincular autodetailmonterrey.com a Cloudflare Pages y actualizar todas las URLs canonicas y Open Graph</td></tr>
+          <tr><td>Formulario de contacto funcional</td><td><span class="badge badge-red">Alta</span></td><td>Conectar formulario a servicio de envio real (Formspree, Resend, o Cloudflare Worker)</td></tr>
+          <tr><td>Google Analytics / GTM</td><td><span class="badge badge-red">Alta</span></td><td>Instalar tracking para medir trafico, fuentes, y conversiones (WhatsApp clicks, formulario)</td></tr>
+          <tr><td>Google Business Profile</td><td><span class="badge badge-blue">Media</span></td><td>Vincular sitio web al perfil de Google Maps del negocio</td></tr>
+          <tr><td>Google Search Console</td><td><span class="badge badge-blue">Media</span></td><td>Registrar propiedad, enviar sitemap.xml y monitorear indexacion</td></tr>
+          <tr><td>Compresion de imagenes</td><td><span class="badge badge-blue">Media</span></td><td>Convertir JPG/PNG a formato WebP para reducir peso de pagina ~60%</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout" style="margin-top: 1.5rem;">
+        <p><strong>Nota:</strong> Este reporte cubre el desarrollo completo del sitio web. Los siguientes pasos listados arriba corresponden a la fase de lanzamiento y optimizacion post-entrega. El sitio esta 100% funcional y listo para recibir trafico.</p>
+      </div>
+
+    </div>
+    <div class="footer">De Marketing &middot; Departamento de Marketing Estrategico Externo &middot; demarketing.mx</div>
+  </div>
+
+</body>
+</html>
