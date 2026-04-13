@@ -11,7 +11,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cotizar Protección Vehicular en Monterrey | Auto Detail Monterrey</title>
-  <meta name="description" content="Cotiza protección vehicular en Monterrey. PPF, cerámica, wraps y accesorios 4x4. Respondemos por WhatsApp en menos de 24 horas.">
+  <meta name="description" content="Cotiza protección vehicular en Monterrey. PPF, cerámico, wraps y accesorios 4x4. Respondemos por WhatsApp en menos de 24 horas.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://autodetailmonterrey.com/contacto">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -19,7 +19,7 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_MX">
   <meta property="og:title" content="Cotizar Protección Vehicular en Monterrey | Auto Detail Monterrey">
-  <meta property="og:description" content="Cotiza protección vehicular en Monterrey. PPF, cerámica, wraps y accesorios 4x4. Respondemos en menos de 24 horas.">
+  <meta property="og:description" content="Cotiza protección vehicular en Monterrey. PPF, cerámico, wraps y accesorios 4x4. Respondemos en menos de 24 horas.">
   <meta property="og:url" content="https://autodetailmonterrey.com/contacto">
   <meta property="og:image" content="https://autodetailmonterrey.com/assets/images/og-image.jpg">
   <meta property="og:image:width" content="1200">
@@ -27,7 +27,7 @@
   <meta property="og:site_name" content="Auto Detail Monterrey">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Cotizar Protección Vehicular en Monterrey | Auto Detail Monterrey">
-  <meta name="twitter:description" content="Cotiza protección vehicular en Monterrey. PPF, cerámica, wraps y accesorios 4x4.">
+  <meta name="twitter:description" content="Cotiza protección vehicular en Monterrey. PPF, cerámico, wraps y accesorios 4x4.">
   <meta name="twitter:image" content="https://autodetailmonterrey.com/assets/images/og-image.jpg">
 
   <!-- Fonts -->
@@ -559,7 +559,7 @@
       </a>
       <nav class="header__nav" id="nav">
         <a href="/ppf.html">PPF</a>
-        <a href="/ceramicos.html">Cerámica</a>
+        <a href="/ceramicos.html">Cerámico</a>
         <a href="/wrap.html">Wraps</a>
         <a href="/polarizados.html">Polarizado</a>
         <a href="/accesorios-4x4.html">Accesorios 4×4</a>
@@ -654,7 +654,7 @@
 
             <div class="form-group">
               <label for="mensaje">Mensaje</label>
-              <textarea id="mensaje" name="mensaje" placeholder="Describe el servicio que necesitas: PPF, ceramica, wrap, accesorios 4x4..."></textarea>
+              <textarea id="mensaje" name="mensaje" placeholder="Describe el servicio que necesitas: PPF, cerámico, wrap, accesorios 4x4..."></textarea>
             </div>
 
             <button type="submit" class="btn-submit">
@@ -753,7 +753,7 @@
 
     // Simple form validation feedback
     const form = document.getElementById('contactForm');
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const correo = document.getElementById('correo');
       if (!correo.value || !correo.validity.valid) {
@@ -761,9 +761,35 @@
         correo.style.borderColor = 'var(--red)';
         return;
       }
-      // Replace with real submission logic
-      alert('Gracias por tu mensaje. Te contactaremos en menos de 24 horas.');
-      form.reset();
+      const btn = form.querySelector('button[type="submit"]');
+      const btnText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+      try {
+        const res = await fetch('https://contact-form.miguel-28a.workers.dev', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nombre: document.getElementById('nombre').value,
+            email: correo.value,
+            vehiculo: document.getElementById('marca').value,
+            telefono: document.getElementById('telefono').value,
+            mensaje: document.getElementById('mensaje').value,
+            origen: 'autodetailmonterrey.com'
+          })
+        });
+        if (res.ok) {
+          form.reset();
+          alert('Gracias por tu mensaje. Te contactaremos en menos de 24 horas.');
+        } else {
+          alert('Hubo un error al enviar. Intentalo de nuevo o contactanos por WhatsApp.');
+        }
+      } catch (err) {
+        alert('Error de conexion. Intentalo de nuevo o contactanos por WhatsApp.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = btnText;
+      }
     });
     // Theme toggle
     (function() {
