@@ -657,6 +657,16 @@
               <textarea id="mensaje" name="mensaje" placeholder="Describe el servicio que necesitas: PPF, cerámico, wrap, accesorios 4x4..."></textarea>
             </div>
 
+            <!--
+              Campo trampa. No lo llena una persona (esta fuera de pantalla y sin
+              foco); un bot que rellena todo por su nombre si. El intake lo
+              conoce: si llega con contenido descarta el envio y responde 200
+              igual, para no ensenarle al bot que lo detectaron.
+            -->
+            <div style="position:absolute;left:-9999px" aria-hidden="true">
+              <label for="hp_field">No llenar</label>
+              <input id="hp_field" name="hp_field" tabindex="-1" autocomplete="off">
+            </div>
             <button type="submit" class="btn-submit">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
               Enviar Mensaje
@@ -766,7 +776,13 @@
       btn.disabled = true;
       btn.textContent = 'Enviando...';
       try {
-        const res = await fetch('https://contact-form.miguel-28a.workers.dev', {
+        // Dominio propio del intake, NO la URL *.workers.dev (cambiado 21-sep-2026).
+        // Esa URL llega al mismo worker, pero AdBlock y el navegador embebido de
+        // WhatsApp la bloquean por el dominio: el fetch falla, el formulario se
+        // queda colgado y la persona se va. Aqui importa mas que en otros lados
+        // porque este sitio vive de WhatsApp -20 enlaces- y no lleva CRM: si el
+        // correo no sale, el lead no existe en ningun lado.
+        const res = await fetch('https://forms.demarketing.mx/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -775,7 +791,11 @@
             vehiculo: document.getElementById('marca').value,
             telefono: document.getElementById('telefono').value,
             mensaje: document.getElementById('mensaje').value,
-            origen: 'autodetailmonterrey.com'
+            origen: 'autodetailmonterrey.com',
+            // El campo trampa viaja SIEMPRE, vacio o no: el intake decide, no
+            // este archivo. Si se mandara solo cuando tiene contenido, un bot
+            // que no lo llena pasaria igual y la trampa no serviria de nada.
+            hp_field: (document.getElementById('hp_field') || {}).value || ''
           })
         });
         if (res.ok) {
